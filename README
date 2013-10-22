@@ -1,1 +1,7 @@
-This file was created by IntelliJ IDEA 12.1.6 for binding GitHub repository
+=== Game Search
+
+My first spring app. It will feature a search over games with lightning fast faceting.
+
+The data will come from some well known news sites and on-the-edge blogs.
+
+It will feature indie titles as well as AAA titles.
