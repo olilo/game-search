@@ -2,17 +2,13 @@ package de.olivelo.gamesearch.mvc;
 
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -37,7 +33,7 @@ public class HomeController {
         } else {
             redirectAttributes.remove("error");
             gameService.addGame(game);
-            return "hello";
+            return "redirect:/";
         }
 
     }

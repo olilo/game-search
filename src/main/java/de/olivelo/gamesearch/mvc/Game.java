@@ -1,40 +1,38 @@
 package de.olivelo.gamesearch.mvc;
 
 import org.apache.solr.client.solrj.beans.Field;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Field
+    @Field("id")
     private long id;
 
-    @Field
+    @Field("name")
+    @NotEmpty
     private String name;
 
-    @Field
-    private String year;
+    @Field("year")
+    @NotEmpty
+    private Integer year;
 
-    @Field
-    private int rating;
+    @Field("rating")
+    private Integer rating;
 
-    @Field
-    private String genre;
+    @Field("genre")
+    private List<String> genre;
 
     protected Game() {
         // empty constructor to comply with bean contract
-    }
-
-    public Game(String name, String year, String genre) {
-        this.name = name;
-        this.year = year;
-        this.genre = genre;
     }
 
     public long getId() {
@@ -49,27 +47,27 @@ public class Game {
         this.name = name;
     }
 
-    public String getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
-    public String getGenre() {
+    public List<String> getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(List<String> genre) {
         this.genre = genre;
     }
 }
