@@ -1,6 +1,11 @@
+# idea files
 .idea
 *.iml
 
+# maven generated files
+target
+
+# solr files (index, logs, run.pid)
 ext/solr-4.5.0/solr/collection1/data/*
 ext/solr-4.5.0/run.pid
 ext/solr-4.5.0/logs
