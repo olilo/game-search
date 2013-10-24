@@ -147,10 +147,13 @@
        modification REST API calls will be allowed; otherwise, error responses will be
        sent back for these requests. 
   -->
+    <schemaFactory class="ClassicIndexSchemaFactory"/>
+    <!--
   <schemaFactory class="ManagedIndexSchemaFactory">
     <bool name="mutable">true</bool>
     <str name="managedSchemaResourceName">managed-schema</str>
   </schemaFactory>
+  -->
 
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
        Index Config - These settings control low-level behavior of indexing
@@ -1562,6 +1565,7 @@
        
        See http://wiki.apache.org/solr/GuessingFieldTypes
     -->
+    <!--
   <updateRequestProcessorChain name="add-unknown-fields-to-the-schema">
     <processor class="solr.RemoveBlankFieldUpdateProcessorFactory"/>
     <processor class="solr.ParseBooleanFieldUpdateProcessorFactory"/>
@@ -1611,6 +1615,8 @@
     <processor class="solr.LogUpdateProcessorFactory"/>
     <processor class="solr.RunUpdateProcessorFactory"/>
   </updateRequestProcessorChain>
+
+    -->
 
   <!-- Deduplication
 

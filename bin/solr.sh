@@ -18,7 +18,9 @@ fi
 # main switch: has start/stop/status/restart
 case $1 in
 start)
-    if [ ! -f "$SOLR_DIR/$PID_FILE" ]; then
+    # if status returns exit code > 0 it means solr is stopped ("failed"), so we can start safely
+    $0 status > /dev/null 2>&1
+    if [ $? -gt 0 ]; then
         echo "Starting Solr"
         cd "$SOLR_DIR"
         nohup "$JAVA" $JAVA_OPTIONS -jar start.jar > "$LOG_FILE" 2>&1 &
@@ -33,9 +35,20 @@ start)
 ;;
 status)
     if [ -f "$SOLR_DIR/$PID_FILE" ]; then
-        echo "Running"
+        PID=$(cat "$SOLR_DIR/$PID_FILE")
+        ps -p "$PID" > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            echo "Running"
+            exit 0
+        else
+            echo "Stopped, but has stale pid file"
+            rm "$SOLR_DIR/$PID_FILE"
+            echo "Removed stale pid file"
+            exit 1
+        fi
     else
         echo "Stopped"
+        exit 1
     fi
 ;;
 stop)
@@ -45,6 +58,7 @@ stop)
     rm -f "$PID_FILE"
     cd "$OLD_PWD"
     echo "ok"
+    exit 0
 ;;
 restart)
     $0 stop
